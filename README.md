@@ -20,6 +20,12 @@
 
 </div>
 
+> [!IMPORTANT]
+> ### Get the complete project
+> **Solution files** are available through the [Lithium Discord server](https://discord.gg/RRvaQHJwdc).
+>
+> Interested in purchasing the **full source code**? Contact me on [Telegram](https://t.me/subgetvariable) or Discord: **@tonythimself**.
+
 ---
 
 ## Overview
