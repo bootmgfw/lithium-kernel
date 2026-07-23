@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{2A2AC394-C7AB-4D76-BF5D-18407F44247C}</ProjectGuid>
+    <TemplateGuid>{1bc93793-694f-48fe-9372-81e2b05556fd}</TemplateGuid>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MinimumVisualStudioVersion>12.0</MinimumVisualStudioVersion>
+    <Configuration>Debug</Configuration>
+    <Platform Condition="'$(Platform)' == ''">x64</Platform>
+    <RootNamespace>lithium_kernel</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.26100.0</WindowsTargetPlatformVersion>
+    <ProjectName>lithium-kernel</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <TargetVersion>Windows10</TargetVersion>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>WindowsKernelModeDriver10.0</PlatformToolset>
+    <ConfigurationType>Driver</ConfigurationType>
+    <DriverType>KMDF</DriverType>
+    <DriverTargetPlatform>
+    </DriverTargetPlatform>
+    <Driver_SpectreMitigation>false</Driver_SpectreMitigation>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
+    <ALLOW_DATE_TIME>1</ALLOW_DATE_TIME>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\masm.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <DebuggerFlavor>DbgengKernelDebugger</DebuggerFlavor>
+    <OutDir>..\..\lithium-bin\$(ProjectName)\</OutDir>
+    <IntDir>..\..\lithium-bin\intermediates\$(ProjectName)\</IntDir>
+    <TargetName>lithium-kernel</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <DriverSign>
+      <FileDigestAlgorithm>sha256</FileDigestAlgorithm>
+    </DriverSign>
+    <ClCompile>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>..\lithium-kernel;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <DebugInformationFormat>None</DebugInformationFormat>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>false</MultiProcessorCompilation>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <PreprocessorDefinitions>_WIN64;_AMD64_;AMD64;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <ControlFlowGuard>false</ControlFlowGuard>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <ConformanceMode>false</ConformanceMode>
+      <OmitDefaultLibName>true</OmitDefaultLibName>
+      <FavorSizeOrSpeed>Size</FavorSizeOrSpeed>
+    </ClCompile>
+    <Link>
+      <EntryPointSymbol>entry</EntryPointSymbol>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <TreatLinkerWarningAsErrors>false</TreatLinkerWarningAsErrors>
+      <AdditionalDependencies>%(AdditionalDependencies);$(DDK_LIB_PATH)ntoskrnl.lib;$(DDK_LIB_PATH)hal.lib;$(DDK_LIB_PATH)wmilib.lib</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <FilesToPackage Include="$(TargetPath)" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="core\dispatch\dispatch.cpp" />
+    <ClCompile Include="core\requests\directory-table-base\dtb.cpp" />
+    <ClCompile Include="core\requests\image-base\image-base.cpp" />
+    <ClCompile Include="core\requests\mouse\mouse.cpp" />
+    <ClCompile Include="core\requests\read-write\physical\physical.cpp" />
+    <ClCompile Include="core\requests\read-write\read-memory\read-memory.cpp" />
+    <ClCompile Include="core\requests\read-write\read-memory\virtual-memory\read-virtual-memory.cpp" />
+    <ClCompile Include="core\requests\virtual-memory\allocate\allocate.cpp" />
+    <ClCompile Include="core\requests\virtual-memory\free-memory\free-memory.cpp" />
+    <ClCompile Include="core\requests\virtual-memory\pattern-scan\find-pattern\find-pattern.cpp" />
+    <ClCompile Include="core\requests\virtual-memory\pattern-scan\pattern-scan.cpp" />
+    <ClCompile Include="core\requests\virtual-memory\protect\protect.cpp" />
+    <ClCompile Include="core\requests\virtual-memory\thread\threads.cpp" />
+    <ClCompile Include="core\requests\virtual-memory\virtual-query\virtual-query.cpp" />
+    <ClCompile Include="core\requests\read-write\write-memory\virtual-memory\write-virtual-memory.cpp" />
+    <ClCompile Include="core\requests\read-write\write-memory\write-memory.cpp" />
+    <ClCompile Include="core\utilities\kernel\kernel.cpp" />
+    <ClCompile Include="core\utilities\kernel\nmi-callbacks\nmi-callbacks.cpp" />
+    <ClCompile Include="core\utilities\kernel\thread\offsets\offsets.cpp" />
+    <ClCompile Include="core\utilities\kernel\thread\thread.cpp" />
+    <ClCompile Include="core\utilities\utilities.cpp" />
+    <ClCompile Include="dependencies\additional\crt\crt.cpp" />
+    <ClCompile Include="entry.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="core\dispatch\dispatch.hpp" />
+    <ClInclude Include="core\requests\directory-table-base\dtb.hpp" />
+    <ClInclude Include="core\requests\image-base\image-base.hpp" />
+    <ClInclude Include="core\requests\mouse\emulation\mouse.hpp" />
+    <ClInclude Include="core\requests\mouse\mouse.hpp" />
+    <ClInclude Include="core\requests\read-write\physical\physical.hpp" />
+    <ClInclude Include="core\requests\read-write\read-memory\read-memory.hpp" />
+    <ClInclude Include="core\requests\read-write\read-memory\virtual-memory\read-virtual-memory.hpp" />
+    <ClInclude Include="core\requests\virtual-memory\allocate\allocate.hpp" />
+    <ClInclude Include="core\requests\virtual-memory\free-memory\free-memory.hpp" />
+    <ClInclude Include="core\requests\virtual-memory\pattern-scan\find-pattern\find-pattern.hpp" />
+    <ClInclude Include="core\requests\virtual-memory\pattern-scan\pattern-scan.hpp" />
+    <ClInclude Include="core\requests\virtual-memory\protect\protect.hpp" />
+    <ClInclude Include="core\requests\virtual-memory\thread\threads.hpp" />
+    <ClInclude Include="core\requests\virtual-memory\virtual-query\virtual-query.hpp" />
+    <ClInclude Include="core\requests\read-write\write-memory\virtual-memory\write-virtual-memory.hpp" />
+    <ClInclude Include="core\requests\read-write\write-memory\write-memory.hpp" />
+    <ClInclude Include="core\requests\requests.hpp" />
+    <ClInclude Include="core\utilities\kernel\kernel.hpp" />
+    <ClInclude Include="core\utilities\kernel\nmi-callbacks\nmi-callbacks.hpp" />
+    <ClInclude Include="core\utilities\kernel\thread\offsets\offsets.hpp" />
+    <ClInclude Include="core\utilities\kernel\thread\thread.hpp" />
+    <ClInclude Include="core\utilities\utilities.hpp" />
+    <ClInclude Include="dependencies\additional\crt\crt.hpp" />
+    <ClInclude Include="dependencies\additional\definitions.hpp" />
+    <ClInclude Include="dependencies\additional\security\imports\kli_importer.hpp" />
+    <ClInclude Include="dependencies\additional\security\strings\enc_strings.hpp" />
+    <ClInclude Include="dependencies\additional\structures\structs.hpp" />
+    <ClInclude Include="dependencies\includes.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <MASM Include="core\requests\mouse\emulation\asm\emulation.asm" />
+    <MASM Include="dependencies\additional\structures\assembler\instructions.asm" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\masm.targets" />
+  </ImportGroup>
+</Project>
