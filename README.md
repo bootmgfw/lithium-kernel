@@ -21,9 +21,7 @@
 </div>
 
 > [!IMPORTANT]
-> ### Get the complete project
->
-> Interested in purchasing more source codes? Contact me on [Telegram](https://t.me/subgetvariable) or Discord: **@tonythimself**.
+> ### Interested in purchasing more source codes? Contact me on [Telegram](https://t.me/subgetvariable) or Discord: **@tonythimself**.
 
 ---
 
